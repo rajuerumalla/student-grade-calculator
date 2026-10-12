@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A fast, accessible student grade calculator for five subjects." />
+    <title>GradePilot | Student Grade Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>window.GRADEPILOT_API_BASE_URL = window.GRADEPILOT_API_BASE_URL || '';</script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="GradePilot home">
+          <span class="brand-mark" aria-hidden="true">G</span>
+          <span>GradePilot</span>
+        </a>
+        <span class="header-badge">Student tools</span>
+      </header>
+
+      <main id="top" class="main-content">
+        <section class="hero" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">Academic progress, made clear</p>
+            <h1 id="page-title">Student Grade Calculator</h1>
+            <p class="hero-copy">Enter marks for each subject to get an instant, accurate snapshot of performance.</p>
+          </div>
+          <div class="hero-orb" aria-hidden="true"><span>100</span><small>max marks</small></div>
+        </section>
+
+        <div class="calculator-grid">
+          <section class="card input-card" aria-labelledby="details-title">
+            <div class="card-heading">
+              <div>
+                <p class="section-kicker">Step 01</p>
+                <h2 id="details-title">Student details</h2>
+              </div>
+              <span class="step-icon" aria-hidden="true">✦</span>
+            </div>
+
+            <form id="grade-form" novalidate>
+              <div class="field-group student-field">
+                <label for="student-name">Student name <span class="optional">(optional)</span></label>
+                <input id="student-name" name="studentName" type="text" autocomplete="name" placeholder="e.g. Aisha Patel" maxlength="80" />
+                <p class="field-hint">Add a name to personalize the result.</p>
+              </div>
+
+              <div class="marks-heading">
+                <div>
+                  <p class="section-kicker">Step 02</p>
+                  <h2>Subject marks</h2>
+                </div>
+                <span class="max-label">Each out of 100</span>
+              </div>
+
+              <div id="subject-fields" class="subject-fields">
+                <div class="field-group mark-field">
+                  <label for="mathematics">Mathematics</label>
+                  <div class="input-suffix"><input id="mathematics" name="mathematics" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="0 – 100" required aria-describedby="mathematics-error" /><span>/ 100</span></div>
+                  <p id="mathematics-error" class="error-message" aria-live="polite"></p>
+                </div>
+                <div class="field-group mark-field">
+                  <label for="science">Science</label>
+                  <div class="input-suffix"><input id="science" name="science" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="0 – 100" required aria-describedby="science-error" /><span>/ 100</span></div>
+                  <p id="science-error" class="error-message" aria-live="polite"></p>
+                </div>
+                <div class="field-group mark-field">
+                  <label for="english">English</label>
+                  <div class="input-suffix"><input id="english" name="english" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="0 – 100" required aria-describedby="english-error" /><span>/ 100</span></div>
+                  <p id="english-error" class="error-message" aria-live="polite"></p>
+                </div>
+                <div class="field-group mark-field">
+                  <label for="computer-science">Computer Science</label>
+                  <div class="input-suffix"><input id="computer-science" name="computerScience" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="0 – 100" required aria-describedby="computer-science-error" /><span>/ 100</span></div>
+                  <p id="computer-science-error" class="error-message" aria-live="polite"></p>
+                </div>
+                <div class="field-group mark-field">
+                  <label for="social-studies">Social Studies</label>
+                  <div class="input-suffix"><input id="social-studies" name="socialStudies" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="0 – 100" required aria-describedby="social-studies-error" /><span>/ 100</span></div>
+                  <p id="social-studies-error" class="error-message" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <p id="form-status" class="form-status" role="alert" aria-live="assertive"></p>
+              <div class="form-actions">
+                <button class="button button-primary" type="submit"><span aria-hidden="true">Calculate result</span><span class="button-arrow" aria-hidden="true">→</span></button>
+                <button class="button button-secondary" id="reset-button" type="button">Reset</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="card result-card" aria-labelledby="result-title" aria-live="polite">
+            <div class="card-heading result-heading">
+              <div>
+                <p class="section-kicker">Your summary</p>
+                <h2 id="result-title">Result overview</h2>
+              </div>
+              <span class="result-status status-neutral" id="overall-status">Awaiting marks</span>
+            </div>
+
+            <div class="score-panel">
+              <div class="score-ring" id="score-ring"><span id="percentage-value">—</span><small>percentage</small></div>
+              <div class="score-copy"><p class="greeting" id="greeting">Your result will appear here</p><p class="score-note" id="score-note">Complete all five subject fields to see your breakdown.</p></div>
+            </div>
+
+            <div class="metrics" aria-label="Overall metrics">
+              <div class="metric"><span>Total marks</span><strong id="total-value">— <small>/ 500</small></strong></div>
+              <div class="metric"><span>Average</span><strong id="average-value">— <small>/ 100</small></strong></div>
+              <div class="metric"><span>Overall grade</span><strong id="grade-value">—</strong></div>
+            </div>
+
+            <div class="breakdown-heading"><h3>Subject breakdown</h3><span>Pass mark: 35</span></div>
+            <div id="breakdown" class="breakdown" aria-label="Subject grade breakdown">
+              <p class="empty-breakdown">Calculate your result to see subject grades.</p>
+            </div>
+            <button class="button button-print" id="print-button" type="button" disabled><span aria-hidden="true">⌁</span> Print / Save result</button>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer"><span>GradePilot</span><span>Built for focused learning</span></footer>
+    </div>
+  </body>
+</html>

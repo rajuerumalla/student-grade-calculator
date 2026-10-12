@@ -1,0 +1,16 @@
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+
+# Local server output and logs
+*.log
+dist/
+build/
+
+# Dependency folders if tooling is added later
+node_modules/
