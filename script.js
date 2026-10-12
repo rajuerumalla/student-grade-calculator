@@ -96,7 +96,6 @@
   }
 
   async function calculateWithApi(name, marks) {
-    if (!apiBaseUrl) return null;
     const markPayload = subjects.reduce((result, subject, index) => {
       result[subject.key] = marks[index];
       return result;

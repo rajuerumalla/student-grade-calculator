@@ -1,5 +1,16 @@
 [build]
   publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+[[redirects]]
+  from = "/api/calculate"
+  to = "/.netlify/functions/calculate"
+  status = 200
 
 [[headers]]
   for = "/*"
